@@ -22,7 +22,7 @@ ARG PIO_TAG=v0.13.0
 ENV SCALA_VERSION=2.11.12
 ENV SPARK_VERSION=2.2.3
 ENV HADOOP_VERSION=2.7.7
-ENV ELASTICSEARCH_VERSION=5.5.3
+ENV ELASTICSEARCH_VERSION=5.6.16
 ENV PGSQL_VERSION=42.2.4
 ENV MYSQL_VERSION=8.0.12
 ENV PIO_HOME=/usr/share/predictionio
@@ -33,7 +33,19 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/src
-RUN git clone -b $PIO_TAG $PIO_GIT_URL
+#RUN git clone -b $PIO_TAG $PIO_GIT_URL
+RUN git clone https://github.com/riteshkranjan/predictionio.git
+
+
+RUN ["ls"]
+RUN ["pwd"]
+
+WORKDIR  /root/.sbt/launchers/1.2.8/
+COPY sbt-launch.jar .
+RUN ["ls"]
+RUN ["pwd"]
+
+
 WORKDIR /opt/src/predictionio
 RUN bash ./make-distribution.sh \
       -Dscala.version=$SCALA_VERSION \
