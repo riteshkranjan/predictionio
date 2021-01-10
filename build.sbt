@@ -68,6 +68,8 @@ elasticsearchVersion in ThisBuild := sys.props.getOrElse("elasticsearch.version"
 
 hbaseVersion in ThisBuild := sys.props.getOrElse("hbase.version", "1.2.6")
 
+resolvers in ThisBuild += "elastic" at "https://artifacts.elastic.co/maven"
+
 json4sVersion in ThisBuild := {
   sparkBinaryVersion.value match {
     case "2.0" | "2.1" | "2.2" | "2.3" => "3.2.11"
